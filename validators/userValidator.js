@@ -27,4 +27,4 @@ const createUserRules = [
     .withMessage('Unknown role')
 ];
 
-module.exports = createUserRules;
+module.exports = createUserRules;    
