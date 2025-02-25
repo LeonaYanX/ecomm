@@ -39,4 +39,4 @@ Product.hasMany(Cart, { foreignKey: 'productId' });
 Cart.belongsTo(Product, { foreignKey: 'productId' });
 
 module.exports = Cart;
-//for commit
+
