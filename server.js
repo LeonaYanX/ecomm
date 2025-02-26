@@ -3,10 +3,10 @@ const cors = require('cors');
 const express = require('express');
 const sequelize = require('./config/database');
 const corsOptions = require('./config/cors');
-//const authRoutes = require('./routes/authRoutes');
+const authRoutes = require('./routes/authRoutes');
 //const orderRoutes = require('./routes/orderRoutes');
 //const paymentRoutes = require('./routes/paymentRoutes');
-//const productRoutes = require('./routes/productRoutes');
+const productRoutes = require('./routes/productRoutes');
 //const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
@@ -17,11 +17,8 @@ app.use(express.json());
 app.use(cors(corsOptions)); // using CORS
 
 // Routes
-app.use('/', async (req,res)=>{
-  res.status(200).json({ message: 'Hello' });
-});
-//app.use('/auth', authRoutes);
-//app.use('/product', productRoutes);
+app.use('/', authRoutes);
+app.use('/product', productRoutes);
 //app.use('/order', orderRoutes);
 //app.use('/payment', paymentRoutes);
 
