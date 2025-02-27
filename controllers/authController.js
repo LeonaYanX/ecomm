@@ -19,7 +19,7 @@ exports.register = async (req,resizeBy,next)=>{
 
     if(existingUser){
         await transaction.rollback();
-        return resizeBy.status(400).json({success: false , message: 'User already exists'});
+        return res.status(400).json({success: false , message: 'User already exists'});
     }
 
     const passwordHashed = await bcrypt.hash(password, 10);
@@ -31,7 +31,7 @@ exports.register = async (req,resizeBy,next)=>{
     },{transaction:transaction});
 
     await transaction.commit();
-    return resizeBy.status(201).json({
+    return res.status(201).json({
         success: true,
         message: 'User created succesfully.',
         user: {username, email, role}
