@@ -28,7 +28,7 @@ exports.placeOrder = async (req, res, next)=>{
         }
 
         const totalAmount = cartItems.reduce(
-            (sum,item)=>sum + item.quantity * item.Product.price,0 );
+            (sum,item)=>sum + item.quantity * item.Productprice,0 );
 
         const order = await Order.create({
             userId,

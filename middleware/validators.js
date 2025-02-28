@@ -10,4 +10,4 @@ const validate = (res, req, next)=>{
     next();
 };
 
-module.exports = {validate};
+module.exports = validate;
