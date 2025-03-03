@@ -7,9 +7,11 @@ const authRoutes = require('./routes/authRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const productRoutes = require('./routes/productRoutes');
-//const errorHandler = require('./middleware/errorHandler');
-
+const errorHandler = require('./middleware/errorHandler');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./config/swagger-output.json');
 const app = express();
+
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -22,8 +24,23 @@ app.use('/product', productRoutes);
 app.use('/order', orderRoutes);
 app.use('/payment', paymentRoutes);
 
+const swaggerUiOptions = {
+  customSiteTitle: "API Documentation",
+  customfavIcon: "/favicon.ico",
+  swaggerOptions: {
+    supportedSubmitMethods: ['get', 'post', 'put', 'delete'],
+    validatorUrl: null,
+    displayRequestDuration: true,
+    docExpansion: "none",
+    withCredentials: true, 
+  },
+};
+
+app.use('/api-docs', cors(corsOptions), swaggerUi.serve, swaggerUi.setup(swaggerDocument, swaggerUiOptions));
+
+console.log('Swagger UI available at http://localhost:3333/api-docs');
 // Error handler
-//app.use(errorHandler);
+app.use(errorHandler);
 
 // Starting server
 const PORT = process.env.PORT || 3333;
